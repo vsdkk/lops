@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3011S PRO | Професійні лопаті для БПЛА</title>
+    <!-- Підключення Tailwind CSS для швидкої стилізації -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Налаштування конфігурації Tailwind (шрифти, кольори) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#111827', // Глибокий сіро-чорний
+                            darker: '#030712', // Майже чорний (Obsidian)
+                            gray: '#374151', // Нейтральний сірий
+                            accent: '#00E5FF', // Трендовий Electric Cyan (Неоновий блакитний)
+                            accentHover: '#00B3CC', // Приглушений блакитний для ховеру
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Підключення Google Fonts (Inter та Montserrat) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- Підключення FontAwesome для іконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712; /* Оновлений темний фон */
+            color: #f8fafc;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Стилізація градієнтного тексту (Cyan to Blue) */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(135deg, #00E5FF 0%, #2979FF 100%);
+        }
+
+        /* Легка анімація появи елементів */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Затримки для анімацій */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        /* Стилізація фону головного екрану */
+        .hero-bg {
+            background-image: 
+                linear-gradient(to bottom, rgba(3, 7, 18, 0.8), rgba(3, 7, 18, 1)),
+                url('https://images.unsplash.com/photo-1579820010410-c10411aaaa88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); /* Тематичний темний фон (абстракція/карбон) */
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Стиль для карток */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300" id="header">
+        <div class="absolute inset-0 bg-brand-darker/90 backdrop-blur-md border-b border-white/10 shadow-lg"></div>
+        <div class="container mx-auto px-4 relative flex items-center justify-between h-20">
+            <!-- Логотип -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center border border-brand-accent/50 group-hover:bg-brand-accent transition-colors">
+                    <i class="fa-solid fa-plane-up text-brand-accent group-hover:text-white transition-colors"></i>
+                </div>
+                <span class="font-montserrat font-bold text-xl tracking-wider">НАЗВА</span>
+            </a>
+
+            <!-- Навігація (Desktop) -->
+            <nav class="hidden md:flex gap-8">
+                <a href="#about" class="text-sm font-medium text-slate-300 hover:text-brand-accent transition-colors">Про продукт</a>
+                <a href="#specs" class="text-sm font-medium text-slate-300 hover:text-brand-accent transition-colors">Характеристики</a>
+                <a href="#benefits" class="text-sm font-medium text-slate-300 hover:text-brand-accent transition-colors">Переваги</a>
+                <a href="#kit" class="text-sm font-medium text-slate-300 hover:text-brand-accent transition-colors">Комплектація</a>
+            </nav>
+
+            <!-- CTA Кнопка (Desktop) -->
+            <div class="hidden md:block">
+                <a href="#order" class="px-6 py-2.5 rounded-full bg-brand-accent hover:bg-brand-accentHover text-slate-900 font-bold text-sm transition-all shadow-[0_0_15px_rgba(0,229,255,0.4)] hover:shadow-[0_0_25px_rgba(0,229,255,0.6)]">
+                    Замовити зараз
+                </a>
+            </div>
+
+            <!-- Мобільне меню (Кнопка) -->
+            <button class="md:hidden text-slate-300 hover:text-white focus:outline-none" id="mobile-menu-btn">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Мобільне меню (Випадаюче) -->
+        <div class="md:hidden hidden bg-brand-dark border-b border-white/10 absolute w-full" id="mobile-menu">
+            <div class="flex flex-col px-4 pt-2 pb-6 space-y-4">
+                <a href="#about" class="text-slate-300 hover:text-brand-accent py-2 mobile-link">Про продукт</a>
+                <a href="#specs" class="text-slate-300 hover:text-brand-accent py-2 mobile-link">Характеристики</a>
+                <a href="#benefits" class="text-slate-300 hover:text-brand-accent py-2 mobile-link">Переваги</a>
+                <a href="#kit" class="text-slate-300 hover:text-brand-accent py-2 mobile-link">Комплектація</a>
+                <a href="#order" class="text-center mt-4 px-6 py-3 rounded-lg bg-brand-accent text-slate-900 font-bold mobile-link">Замовити зараз</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 hero-bg min-h-screen flex items-center">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Текстова частина -->
+                <div class="lg:w-1/2 text-center lg:text-left fade-in-up">
+                    
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-6">
+                        <!-- Власне виробництво Badge -->
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-accent/30 bg-brand-accent/10 text-brand-accent text-xs font-semibold uppercase tracking-wider shadow-[0_0_10px_rgba(0,229,255,0.2)]">
+                            <i class="fa-solid fa-industry"></i>
+                            Власне виробництво
+                        </div>
+                        
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-500 text-xs font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            Увага: Без адаптера
+                        </div>
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        Професійні складані лопаті <span class="text-gradient">НАЗВА</span> для важких БПЛА та агродронів
+                    </h1>
+                    
+                    <p class="text-lg md:text-xl text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0">
+                        Безпрецедентна підйомна сила, виняткова ефективність за будь-яких навантажень та абсолютна стабільність польоту. Створені спеціально для тих, хто не йде на компроміси в надійності свого флоту.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                        <a href="#order" class="w-full sm:w-auto px-8 py-4 rounded-lg bg-brand-accent hover:bg-brand-accentHover text-slate-900 font-bold text-lg transition-all shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:shadow-[0_0_30px_rgba(0,229,255,0.6)] flex items-center justify-center gap-2">
+                            Купити комплект <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#specs" class="w-full sm:w-auto px-8 py-4 rounded-lg bg-white/5 hover:bg-white/10 text-white border border-white/10 font-medium text-lg transition-all text-center">
+                            Дивитись характеристики
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Візуалізація продукту -->
+                <div class="lg:w-1/2 fade-in-up delay-200 relative">
+                    <!-- Замість реального фото лопатей, використовуємо якісний плейсхолдер тематичного кольору -->
+                    <div class="relative w-full aspect-square max-w-md mx-auto">
+                        <div class="absolute inset-0 bg-brand-accent/20 rounded-full filter blur-[100px] animate-pulse"></div>
+                        <!-- ТУТ ВСТАВТЕ СВОЄ ГОЛОВНЕ ФОТО -->
+                        <img src="12125125125.jpeg" alt="Лопаті НАЗВА" class="relative z-10 w-full h-full object-cover rounded-2xl border border-white/10 shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                        
+                        <!-- Декоративні елементи навколо зображення -->
+                        <div class="absolute top-10 -left-10 bg-brand-dark p-4 rounded-lg border border-white/10 shadow-xl hidden md:block animate-bounce" style="animation-duration: 3s;">
+                            <p class="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Вага</p>
+                            <p class="text-xl font-bold text-white">47 г</p>
+                        </div>
+                        <div class="absolute bottom-10 -right-10 bg-brand-dark p-4 rounded-lg border border-white/10 shadow-xl hidden md:block animate-bounce" style="animation-duration: 4s;">
+                            <p class="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Тяга</p>
+                            <p class="text-xl font-bold text-brand-accent">Max</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-brand-dark">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Новий стандарт для важких платформ</h2>
+                <div class="w-20 h-1 bg-brand-accent mx-auto mb-8 rounded-full"></div>
+                <p class="text-lg text-slate-300 leading-relaxed">
+                    Складані пропелери <span class="text-white font-bold">3011S</span> (діаметр 30", крок 11") розроблені спеціально для важких платформ, агродронів та вантажних БПЛА. 
+                    Вони гарантують виняткову стабільність, наднизький рівень вібрацій та абсолютну надійність завдяки використанню преміального міцного композиту. 
+                    Ваш дрон працюватиме ефективніше, довше та безпечніше.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications -->
+    <section id="specs" class="py-20 bg-brand-darker relative overflow-hidden">
+        <!-- Декоративні лінії на фоні -->
+        <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(#334155 1px, transparent 1px), linear-gradient(90deg, #334155 1px, transparent 1px); background-size: 50px 50px;"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Технічні характеристики</h2>
+                <p class="text-slate-400">Детальні параметри лопатей 3011S</p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Характеристика 1 -->
+                    <div class="glass-card p-6 flex items-start gap-4 hover:border-brand-accent/50 transition-colors">
+                        <div class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-ruler-combined text-2xl text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-slate-400 text-sm font-semibold uppercase mb-1">Формат</h4>
+                            <p class="text-xl font-bold">30×11 (3011S)</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Характеристика 2 -->
+                    <div class="glass-card p-6 flex items-start gap-4 hover:border-brand-accent/50 transition-colors">
+                        <div class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-arrows-alt text-2xl text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-slate-400 text-sm font-semibold uppercase mb-1">Габарити</h4>
+                            <p class="text-lg font-bold">Діаметр — 30"<br><span class="text-sm font-normal text-slate-300">Крок — 11", Довжина лопаті — 36 см</span></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Характеристика 3 -->
+                    <div class="glass-card p-6 flex items-start gap-4 hover:border-brand-accent/50 transition-colors">
+                        <div class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-scale-balanced text-2xl text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-slate-400 text-sm font-semibold uppercase mb-1">Вага</h4>
+                            <p class="text-xl font-bold">47 г <span class="text-sm font-normal text-slate-400">(одна лопать)</span></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Характеристика 4 -->
+                    <div class="glass-card p-6 flex items-start gap-4 hover:border-brand-accent/50 transition-colors">
+                        <div class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-layer-group text-2xl text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-slate-400 text-sm font-semibold uppercase mb-1">Матеріал</h4>
+                            <p class="text-xl font-bold text-brand-accent">Композит</p>
+                            <p class="text-sm text-slate-300 mt-1">Карбон + армований полімер</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Характеристика 5 -->
+                    <div class="glass-card p-6 flex items-start gap-4 hover:border-brand-accent/50 transition-colors">
+                        <div class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-microchip text-2xl text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-slate-400 text-sm font-semibold uppercase mb-1">Сумісність</h4>
+                            <p class="text-lg font-bold">Двигуни серії X8, X9 та їх аналоги</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Характеристика 6 -->
+                    <div class="glass-card p-6 flex items-start gap-4 hover:border-brand-accent/50 transition-colors">
+                        <div class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-wrench text-2xl text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-slate-400 text-sm font-semibold uppercase mb-1">Монтаж</h4>
+                            <p class="text-lg font-bold">Отвір 10 мм</p>
+                            <p class="text-sm text-slate-300 mt-1">Товщина біля основи 7 мм</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section id="benefits" class="py-20 bg-brand-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Переваги 3011S</h2>
+                <div class="w-20 h-1 bg-brand-accent mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Перевага 1 -->
+                <div class="text-center group">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-slate-800 flex items-center justify-center mb-6 group-hover:bg-brand-accent group-hover:scale-110 transition-all duration-300 border border-white/10">
+                        <i class="fa-solid fa-shield-halved text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Надійність</h3>
+                    <p class="text-slate-400">Відмінне заводське балансування та висока міцність конструкції.</p>
+                </div>
+                
+                <!-- Перевага 2 -->
+                <div class="text-center group">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-slate-800 flex items-center justify-center mb-6 group-hover:bg-brand-accent group-hover:scale-110 transition-all duration-300 border border-white/10">
+                        <i class="fa-solid fa-weight-hanging text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Оптимальна вага</h3>
+                    <p class="text-slate-400">Легкість (всього 47 г) при збереженні високої стійкості до деформацій.</p>
+                </div>
+                
+                <!-- Перевага 3 -->
+                <div class="text-center group">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-slate-800 flex items-center justify-center mb-6 group-hover:bg-brand-accent group-hover:scale-110 transition-all duration-300 border border-white/10">
+                        <i class="fa-solid fa-gear text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Практичність</h3>
+                    <p class="text-slate-400">Складаний механізм забезпечує надзвичайно зручне транспортування.</p>
+                </div>
+                
+                <!-- Перевага 4 -->
+                <div class="text-center group">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-slate-800 flex items-center justify-center mb-6 group-hover:bg-brand-accent group-hover:scale-110 transition-all duration-300 border border-white/10">
+                        <i class="fa-solid fa-chart-line text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Ефективність</h3>
+                    <p class="text-slate-400">Висока тяга та енергоефективність для збільшення часу польоту.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kit Section -->
+    <section id="kit" class="py-20 bg-brand-darker">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12 max-w-6xl mx-auto">
+                <div class="lg:w-1/2 w-full">
+                    <!-- ТУТ ВСТАВТЕ ФОТО КОМПЛЕКТАЦІЇ -->
+                    <img src="ВСТАВТЕ_ТУТ_НАЗВУ_ФОТО_КОМПЛЕКТАЦІЇ.jpg" alt="Комплектація НАЗВА" class="w-full rounded-2xl border border-white/10 shadow-2xl">
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Комплектація</h2>
+                    <p class="text-xl text-slate-300 mb-8 border-l-4 border-brand-accent pl-4 py-1">
+                        Готовий до встановлення комплект для однієї осі.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 glass-card p-4">
+                            <i class="fa-solid fa-check text-brand-accent"></i>
+                            <span class="text-lg font-medium">1 лопать прямого обертання (CW)</span>
+                        </li>
+                        <li class="flex items-center gap-3 glass-card p-4">
+                            <i class="fa-solid fa-check text-brand-accent"></i>
+                            <span class="text-lg font-medium">1 лопать зворотного обертання (CCW)</span>
+                        </li>
+                        <li class="flex items-center gap-3 glass-card p-4">
+                            <i class="fa-solid fa-check text-brand-accent"></i>
+                            <span class="text-lg font-medium">4 монтажні шайби</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex gap-3 items-start">
+                        <i class="fa-solid fa-circle-info text-red-500 mt-1"></i>
+                        <p class="text-slate-300 text-sm">Зверніть увагу: Адаптер (хаб) для кріплення на двигун не входить до комплекту та купується окремо.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Applications -->
+    <section class="py-20 bg-brand-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ідеально підходять для:</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Картка 1 -->
+                <div class="glass-card p-8 rounded-2xl text-center hover:border-brand-accent/50 transition-colors group cursor-pointer h-40 flex flex-col justify-center items-center">
+                    <i class="fa-solid fa-leaf text-3xl text-brand-accent mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold text-white mb-0">Агродрони</h3>
+                </div>
+                
+                <!-- Картка 2 -->
+                <div class="glass-card p-8 rounded-2xl text-center hover:border-brand-accent/50 transition-colors group cursor-pointer h-40 flex flex-col justify-center items-center">
+                    <i class="fa-solid fa-box text-3xl text-brand-accent mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold text-white mb-0">Вантажні БПЛА</h3>
+                </div>
+                
+                <!-- Картка 3 -->
+                <div class="glass-card p-8 rounded-2xl text-center hover:border-brand-accent/50 transition-colors group cursor-pointer h-40 flex flex-col justify-center items-center">
+                    <i class="fa-solid fa-drone text-3xl text-brand-accent mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold text-white mb-0">Професійні БПЛА</h3>
+                </div>
+                
+                <!-- Картка 4 -->
+                <div class="glass-card p-8 rounded-2xl text-center hover:border-brand-accent/50 transition-colors group cursor-pointer h-40 flex flex-col justify-center items-center">
+                    <i class="fa-solid fa-map-location-dot text-3xl text-brand-accent mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold text-white mb-0">Картографування</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Order Form -->
+    <footer id="order" class="bg-brand-darker border-t border-white/10 pt-20 pb-10">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto glass-card p-8 md:p-12 mb-16 relative overflow-hidden">
+                <!-- Декор -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent/10 rounded-full blur-[80px] -mr-32 -mt-32"></div>
+                
+                <div class="text-center mb-8 relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Готові покращити свій дрон?</h2>
+                    <p class="text-lg text-slate-300">Замовте лопаті 3011S вже сьогодні та забезпечте надійний політ вашій платформі.</p>
+                </div>
+                
+                <!-- Форма замовлення -->
+                <form class="relative z-10 max-w-xl mx-auto" onsubmit="event.preventDefault(); alert('Дякуємо! Ваша заявка прийнята. Ми зв\'яжемось з вами найближчим часом.');">
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Ваше ім'я</label>
+                        <input type="text" id="name" required class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors" placeholder="Іван Іванов">
+                    </div>
+                    <div class="mb-6">
+                        <label for="phone" class="block text-sm font-medium text-slate-300 mb-2">Номер телефону</label>
+                        <input type="tel" id="phone" required class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors" placeholder="+38 (000) 000-00-00">
+                    </div>
+                    <button type="submit" class="w-full py-4 rounded-lg bg-brand-accent hover:bg-brand-accentHover text-slate-900 font-bold text-lg transition-all shadow-[0_0_15px_rgba(0,229,255,0.4)] hover:shadow-[0_0_25px_rgba(0,229,255,0.6)]">
+                        Замовити зараз
+                    </button>
+                    <p class="text-xs text-slate-500 text-center mt-4">Натискаючи кнопку, ви погоджуєтесь з політикою конфіденційності.</p>
+                </form>
+            </div>
+
+            <!-- Нижня частина футера -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-white/10">
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-plane-up text-brand-accent"></i>
+                        <span class="font-montserrat font-bold text-lg">НАЗВА</span>
+                    </div>
+                    <div class="hidden sm:block text-slate-700">|</div>
+                    <div class="text-brand-accent text-sm font-semibold uppercase tracking-wider flex items-center gap-1">
+                        <i class="fa-solid fa-industry"></i> Власне виробництво
+                    </div>
+                </div>
+                
+                <div class="text-slate-400 text-sm text-center">
+                    &copy; 2026 Всі права захищено. Професійні комплектуючі для БПЛА.
+                </div>
+                
+                <div class="flex gap-4">
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fa-brands fa-telegram text-xl"></i></a>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fa-brands fa-viber text-xl"></i></a>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fa-regular fa-envelope text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Скрипт для мобільного меню
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const header = document.getElementById('header');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Скрипт для зміни стилю шапки при скролі
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+            }
+        });
+        
+        // Початкове встановлення падінгів шапки
+        if (window.scrollY <= 50) {
+            header.classList.add('py-4');
+        } else {
+            header.classList.add('py-2');
+        }
+    </script>
+</body>
+</html>
